@@ -5,22 +5,25 @@ public class MyBot : IChessBot
 {
     private int searchDepth = 3;
     private Move bestMove;
+    private Board board;
     // Point values for each piece type for evaluation
     int[] pointValues = {100, 350, 350, 525, 1000, 99999};
     public Move Think(Board board, Timer timer)
     {
+        this.board = board;
         // Call the Minimax algorithm to find the best move
-        Minimax(board, searchDepth, int.MinValue, int.MaxValue);
+        Minimax(searchDepth, int.MinValue, int.MaxValue);
+        
         return bestMove;
     }
 
     // Minimax algorithm with alpha-beta pruning
-    private int Minimax(Board board, int depth, int alpha, int beta)
+    private int Minimax(int depth, int alpha, int beta)
     {
         // If the search reaches the desired depth or the end of the game, evaluate the position and return its value
         if (depth == 0)
         {
-            return EvaluateBoard(board);
+            return EvaluateBoard();
         }
 
         int bestEval = board.IsWhiteToMove ? int.MinValue : int.MaxValue;
@@ -31,7 +34,7 @@ public class MyBot : IChessBot
         {
             // Make the move on a temporary board and call Minimax recursively
             board.MakeMove(move);
-            moveEval = Minimax(board, depth - 1, alpha, beta);
+            moveEval = Minimax(depth - 1, alpha, beta);
             board.UndoMove(move);
 
             // Update the best evaluation and alpha/beta values based on whether it's a minimizing or maximizing player
@@ -58,11 +61,20 @@ public class MyBot : IChessBot
         return bestEval;
     }
 
-    private int EvaluateBoard(Board board)
+    private int EvaluateBoard()
     {
         int materialValue = 0;
         PieceList[] pieceLists = board.GetAllPieceLists();
-            
+
+        if (board.IsDraw())
+        {
+            return 0;
+        }
+        if (board.IsInCheckmate())
+        {
+            return board.IsWhiteToMove ? int.MaxValue : int.MinValue;
+        }
+        // Loop through each piece type and add the difference in material value to the total
         for(int i = 0;i < 5; i++){
             materialValue += (pieceLists[i].Count - pieceLists[i + 6].Count) * pointValues[i];
         }
