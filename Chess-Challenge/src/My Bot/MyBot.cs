@@ -36,17 +36,17 @@ public class MyBot : IChessBot
             if (board.IsWhiteToMove)
             {
                 bestEval = Math.Max(bestEval, moveEval);
-                alpha = Math.Max(alpha, moveEval);
+                alpha = Math.Min(alpha, bestEval);
             }
             else
             {
                 bestEval = Math.Min(bestEval, moveEval);
-                beta = Math.Min(beta, moveEval);
+                beta = Math.Max(beta, bestEval);
             }
             
             if (beta <= alpha)
             {
-                break;
+                return bestEval;
             }
 
             if (depth == searchDepth && moveEval == bestEval)
