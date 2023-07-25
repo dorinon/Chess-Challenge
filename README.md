@@ -5,16 +5,16 @@ this is a chess bot for Seb Lague's chess coding challenge.
 Negamax + Alpha beta pruning
 
 ## Evaluation
-Material
+Material  
 Mobility
 
 ## future features
-Quiescence Search
-Iterative Deepening
-Transposition Table
-Best-First
-MVV-LVA
-Piece-Square Tables
-Pawn Structure/n
-Center Control
-King Safety
+Quiescence Search  
+Iterative Deepening  
+Transposition Table  
+Best-First  
+MVV-LVA  
+Piece-Square Tables  
+Pawn Structure  
+Center Control  
+King Safety  
