@@ -37,6 +37,8 @@ namespace ChessChallenge.Application
         public bool HumanWasWhiteLastGame { get; private set; }
 
         // Bot match state
+        int totalMovesPlayed = 0;
+        public int trueTotalMovesPlayed = 0;
         readonly string[] botMatchStartFens;
         int botMatchGameIndex;
         public BotMatchStats BotStatsA { get; private set; }
@@ -77,6 +79,7 @@ namespace ChessChallenge.Application
 
         public void StartNewGame(PlayerType whiteType, PlayerType blackType)
         {
+            trueTotalMovesPlayed += totalMovesPlayed;
             // End any ongoing game
             EndGame(GameResult.DrawByArbiter, log: false, autoStartNextBotMatch: false);
             gameID = rng.Next();
@@ -147,6 +150,7 @@ namespace ChessChallenge.Application
             API.Board botBoard = new(new(board));
             try
             {
+                totalMovesPlayed++;
                 API.Timer timer = new(PlayerToMove.TimeRemainingMs);
                 API.Move move = PlayerToMove.Bot.Think(botBoard, timer);
                 return new Move(move.RawValue);
