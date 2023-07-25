@@ -15,7 +15,6 @@ Transposition Table
 Best-First
 MVV-LVA
 Piece-Square Tables
-Pawn Structure
-
+Pawn Structure/n
 Center Control
 King Safety
