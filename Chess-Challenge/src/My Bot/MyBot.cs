@@ -3,23 +3,22 @@ using ChessChallenge.API;
 
 public class MyBot : IChessBot
 {
-    private int maxDepth = 3;
+    private int maxDepth = 4;
     private Move bestMove;
     private Board board;
-    private int bigNum = 1000000;
     // Point values for each piece type for evaluation
     int[] pointValues = {100, 350, 350, 525, 1000, 99999};
     public Move Think(Board board, Timer timer)
     {
         this.board = board;
-        
+
         // Call the Minimax algorithm to find the best move
-        Console.WriteLine(Minimax(maxDepth, -bigNum, bigNum, board.IsWhiteToMove ? 1 : -1) + "  " + bestMove);
+        Console.WriteLine(Search(maxDepth, int.MinValue, int.MaxValue, board.IsWhiteToMove ? 1 : -1) + "  " + bestMove + " is white turn: " + board.IsWhiteToMove);
         return bestMove;
     }
 
-    // Minimax algorithm with alpha-beta pruning
-    private int Minimax(int depth, int alpha, int beta, int color)
+    // Negamax algorithm with alpha-beta pruning
+    private int Search(int depth, int alpha, int beta, int color)
     {
         // If the search reaches the desired depth or the end of the game, evaluate the position and return its value
         if (depth == 0 || board.IsDraw() || board.IsInCheckmate())
@@ -30,32 +29,35 @@ public class MyBot : IChessBot
             }
             if (board.IsInCheckmate())
             {
-                return (bigNum - (maxDepth - depth)) * -color;
+                return -(int.MaxValue - (maxDepth - depth));
             }
             return EvaluateBoard(color);
         }
-        int bestEval = -bigNum * color;
-        int moveEval = bestEval;
+        int bestEval = int.MinValue;
+        int eval = bestEval;
 
         // Generate and loop through all legal moves for the current player
         foreach (Move move in board.GetLegalMoves())
         {
-            // Make the move on a temporary board and call Minimax recursively
+            // Make the move on a temporary board and call search recursively
             board.MakeMove(move);
 
-            moveEval = Minimax(depth - 1, -beta, -alpha, -color);
+            eval = -Search(depth - 1, -beta, -alpha, -color);
             
             board.UndoMove(move);
-            /*alpha = Math.Max(alpha, moveEval);
-            if (alpha <= beta)
+
+            // Update the best move and prune if necessary
+            if (eval > bestEval)
             {
-                break;
-            }*/
-            // Update the best evaluation and alpha/beta values based on whether it's a minimizing or maximizing player
-            if (moveEval * color > bestEval * color)
-            {
-                bestEval = moveEval;
-                if (depth == 3) bestMove = move;
+                bestEval = eval;
+                if (depth == maxDepth) bestMove = move;
+                // Improve alpha
+                alpha = Math.Max(alpha, eval);
+                
+                if (alpha >= beta)
+                {
+                    break;
+                }
             }
         }
         
@@ -65,12 +67,12 @@ public class MyBot : IChessBot
     private int EvaluateBoard(int color)
     {
         int materialValue = 0;
-        int mobilityValue = board.GetLegalMoves().Length * color;
+        int mobilityValue = board.GetLegalMoves().Length;
         PieceList[] pieceLists = board.GetAllPieceLists();
         // Loop through each piece type and add the difference in material value to the total
         for(int i = 0;i < 5; i++){
             materialValue += (pieceLists[i].Count - pieceLists[i + 6].Count) * pointValues[i];
         }
-        return materialValue + mobilityValue;
+        return materialValue * color + mobilityValue * color;
     }
 }
