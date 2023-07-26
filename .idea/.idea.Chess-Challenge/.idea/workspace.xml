@@ -7,7 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="added shit" />
+    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="working with alpha beta pruning and negamax and partly optimized">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,13 +30,14 @@
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52173ca6843e51e82dc42a61868a2d712bf326f61d9e38419ed77568a1a97f2/Math.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Documents/dor/Downloads/MyBot (1).cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Documents/dor/Downloads/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -44,29 +51,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "D:\\Documents\\dor\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "D:\\Documents\\dor\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Dor\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;D:\\Documents\\dor\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;D:\\Documents\\dor\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Dor\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Chess-Challenge" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -213,7 +220,8 @@
     <MESSAGE value="switched foreach by for and increased depth to 4" />
     <MESSAGE value="added improved bot stats" />
     <MESSAGE value="added shit" />
-    <option name="LAST_COMMIT_MESSAGE" value="added shit" />
+    <MESSAGE value="working with alpha beta pruning and negamax and partly optimized" />
+    <option name="LAST_COMMIT_MESSAGE" value="working with alpha beta pruning and negamax and partly optimized" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
