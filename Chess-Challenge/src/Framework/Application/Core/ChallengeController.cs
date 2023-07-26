@@ -63,8 +63,7 @@ namespace ChessChallenge.Application
             Log($"Launching Chess-Challenge version {Settings.Version}");
             tokenCount = GetTokenCount();
             Warmer.Warm();
-
-            rng = new Random();
+            
             moveGenerator = new();
             boardUI = new BoardUI();
             board = new Board();

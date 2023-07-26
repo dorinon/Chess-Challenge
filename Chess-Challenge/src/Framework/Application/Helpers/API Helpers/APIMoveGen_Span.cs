@@ -60,14 +60,14 @@ namespace ChessChallenge.Application.APIHelpers
 
             Init();
 
-            GenerateKingMoves(moves);
+            GenerateKingMoves(ref moves);
 
             // Only king moves are valid in a double check position, so can return early.
             if (!inDoubleCheck)
             {
-                GenerateSlidingMoves(moves);
-                GenerateKnightMoves(moves);
-                GeneratePawnMoves(moves);
+                GenerateSlidingMoves(ref moves);
+                GenerateKnightMoves(ref moves);
+                GeneratePawnMoves(ref moves);
             }
 
             moves = moves.Slice(0, currMoveIndex);
@@ -109,21 +109,19 @@ namespace ChessChallenge.Application.APIHelpers
         API.Move CreateAPIMove(int startSquare, int targetSquare, int flag)
         {
             int movePieceType = PieceHelper.PieceType(board.Square[startSquare]);
-            return CreateAPIMove(startSquare, targetSquare, flag, movePieceType);
+            int capturePieceType = PieceHelper.PieceType(board.Square[targetSquare]);
+            API.Move apiMove = new(new Move(startSquare, targetSquare, flag), movePieceType, capturePieceType);
+            return apiMove;
         }
 
         API.Move CreateAPIMove(int startSquare, int targetSquare, int flag, int movePieceType)
         {
             int capturePieceType = PieceHelper.PieceType(board.Square[targetSquare]);
-            if (flag == Move.EnPassantCaptureFlag)
-            {
-                capturePieceType = PieceHelper.Pawn;
-            }
             API.Move apiMove = new(new Move(startSquare, targetSquare, flag), movePieceType, capturePieceType);
             return apiMove;
         }
 
-        void GenerateKingMoves(Span<API.Move> moves)
+        void GenerateKingMoves(ref Span<API.Move> moves)
         {
             ulong legalMask = ~(opponentAttackMap | friendlyPieces);
             ulong kingMoves = Bits.KingMoves[friendlyKingSquare] & legalMask & moveTypeMask;
@@ -159,7 +157,7 @@ namespace ChessChallenge.Application.APIHelpers
             }
         }
 
-        void GenerateSlidingMoves(Span<API.Move> moves)
+        void GenerateSlidingMoves(ref Span<API.Move> moves)
         {
             // Limit movement to empty or enemy squares, and must block check if king is in check.
             ulong moveMask = emptyOrEnemySquares & checkRayBitmask & moveTypeMask;
@@ -214,7 +212,7 @@ namespace ChessChallenge.Application.APIHelpers
         }
 
 
-        void GenerateKnightMoves(Span<API.Move> moves)
+        void GenerateKnightMoves(ref Span<API.Move> moves)
         {
             int friendlyKnightPiece = PieceHelper.MakePiece(PieceHelper.Knight, board.MoveColour);
             // bitboard of all non-pinned knights
@@ -234,7 +232,7 @@ namespace ChessChallenge.Application.APIHelpers
             }
         }
 
-        void GeneratePawnMoves(Span<API.Move> moves)
+        void GeneratePawnMoves(ref Span<API.Move> moves)
         {
             int pushDir = board.IsWhiteToMove ? 1 : -1;
             int pushOffset = pushDir * 8;
@@ -325,7 +323,7 @@ namespace ChessChallenge.Application.APIHelpers
                     int startSquare = targetSquare - pushOffset;
                     if (!IsPinned(startSquare))
                     {
-                        GeneratePromotions(moves, startSquare, targetSquare);
+                        GeneratePromotions(startSquare, targetSquare, ref moves);
                     }
                 }
             }
@@ -338,7 +336,7 @@ namespace ChessChallenge.Application.APIHelpers
 
                 if (!IsPinned(startSquare) || alignMask[startSquare, friendlyKingSquare] == alignMask[targetSquare, friendlyKingSquare])
                 {
-                    GeneratePromotions(moves, startSquare, targetSquare);
+                    GeneratePromotions(startSquare, targetSquare, ref moves);
                 }
             }
 
@@ -349,7 +347,7 @@ namespace ChessChallenge.Application.APIHelpers
 
                 if (!IsPinned(startSquare) || alignMask[startSquare, friendlyKingSquare] == alignMask[targetSquare, friendlyKingSquare])
                 {
-                    GeneratePromotions(moves, startSquare, targetSquare);
+                    GeneratePromotions(startSquare, targetSquare, ref moves);
                 }
             }
 
@@ -380,7 +378,7 @@ namespace ChessChallenge.Application.APIHelpers
             }
         }
 
-        void GeneratePromotions(Span<API.Move> moves, int startSquare, int targetSquare)
+        void GeneratePromotions(int startSquare, int targetSquare, ref Span<API.Move> moves)
         {
             moves[currMoveIndex++] = CreateAPIMove(startSquare, targetSquare, Move.PromoteToQueenFlag, PieceHelper.Pawn);
             // Don't generate non-queen promotions in q-search
