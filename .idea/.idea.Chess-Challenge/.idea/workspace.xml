@@ -8,10 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="working with alpha beta pruning and negamax and partly optimized">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/API/Board.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/API/Board.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +27,8 @@
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/API/Board.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
@@ -179,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690367152886</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="working with alpha beta pruning and negamax and partly optimized">
+      <option name="closed" value="true" />
+      <created>1690390467327</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1690390467327</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,7 +204,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>

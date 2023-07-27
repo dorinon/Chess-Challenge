@@ -14,10 +14,6 @@ public class MyBot : IChessBot
 
         // Call the Minimax algorithm to find the best move
         int eval = Search(maxDepth, -30000, 30000, board.IsWhiteToMove ? 1 : -1);
-        if (eval == -30000)
-        {
-            
-        }
         Console.WriteLine(eval + "  " + bestMove + " is white turn: " + board.IsWhiteToMove);
         return bestMove;
     }
@@ -25,7 +21,7 @@ public class MyBot : IChessBot
     // Negamax algorithm with alpha-beta pruning
     private int Search(int depth, int alpha, int beta, int color)
     {
-        if (board.IsDraw()) return 0;                                      
+        if (board.) return 0;                                      
         if (board.IsInCheckmate()) return -30000 - depth;
         
         bool qsearch = depth <= 0;
