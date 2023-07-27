@@ -24,20 +24,36 @@ public class MyBot : IChessBot
         
         if (board.IsInsufficientMaterial() || board.IsRepeatedPosition() || board.FiftyMoveCounter >= 100) return 0;                                      
         if (board.GetLegalMoves().Length == 0) return board.IsInCheck() ? -29000 - depth : 0;
-        bool qsearch = depth == 0;
+        bool qsearch = depth <= 0;
         int bestEval = -30000;
         int eval;
         if (qsearch)
         {
-            return EvaluateBoard(color);
-            //bestEval = eval;
-            //if(depth <= -2) return eval;
+            bestEval = EvaluateBoard(color);
+            //eval is StandPat
+            if(depth <= -4 || bestEval >= beta) return bestEval;
         }
-        Move[] legalMoves = board.GetLegalMoves(qsearch);
-        // Generate and loop through all legal moves for the current player
-        for (int i = 0; legalMoves.Length > i; i++)
+        Move[] moves = board.GetLegalMoves(qsearch);
+        int[] scores = new int[moves.Length];
+        
+        for(int i = 0; i < moves.Length; i++) {
+            Move move = moves[i];
+
+            if(move.IsCapture) scores[i] = (int)move.CapturePieceType - (int)move.MovePieceType;
+        }
+
+        for (int i = 0; i < moves.Length; i++)
         {
-            Move move = legalMoves[i];
+            for(int j = i + 1; j < moves.Length; j++) {
+                if(scores[j] > scores[i])
+                    (scores[i], scores[j], moves[i], moves[j]) = (scores[j], scores[i], moves[j], moves[i]);
+            }
+        }
+        // Generate and loop through all legal moves for the current player
+        for (int i = 0; moves.Length > i; i++)
+        {
+            // Incrementally sort moves
+            Move move = moves[i];
             // Make the move on a temporary board and call search recursively
             board.MakeMove(move);
             eval = -Search(depth -1, -beta, -alpha, -color);

@@ -80,6 +80,7 @@ namespace ChessChallenge.Application
         public void StartNewGame(PlayerType whiteType, PlayerType blackType)
         {
             trueTotalMovesPlayed += totalMovesPlayed;
+            totalMovesPlayed = 0;
             // End any ongoing game
             EndGame(GameResult.DrawByArbiter, log: false, autoStartNextBotMatch: false);
             gameID = rng.Next();
@@ -276,6 +277,7 @@ namespace ChessChallenge.Application
 
         void EndGame(GameResult result, bool log = true, bool autoStartNextBotMatch = true)
         {
+            
             if (isPlaying)
             {
                 isPlaying = false;
