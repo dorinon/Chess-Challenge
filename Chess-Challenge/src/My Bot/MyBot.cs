@@ -21,10 +21,10 @@ public class MyBot : IChessBot
     // Negamax algorithm with alpha-beta pruning
     private int Search(int depth, int alpha, int beta, int color)
     {
-        if (board.) return 0;                                      
-        if (board.IsInCheckmate()) return -30000 - depth;
         
-        bool qsearch = depth <= 0;
+        if (board.IsInsufficientMaterial() || board.IsRepeatedPosition() || board.FiftyMoveCounter >= 100) return 0;                                      
+        if (board.GetLegalMoves().Length == 0) return board.IsInCheck() ? -29000 - depth : 0;
+        bool qsearch = depth == 0;
         int bestEval = -30000;
         int eval;
         if (qsearch)
