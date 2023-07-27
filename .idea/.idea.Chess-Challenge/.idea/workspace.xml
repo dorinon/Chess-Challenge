@@ -9,7 +9,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="added changes from up stream manually">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/UI/MatchStatsUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/UI/MatchStatsUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,17 +32,15 @@
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/API/Board.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Helpers/API Helpers/APIMoveGen_Span.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Helpers/Tester.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MatchStatsUI.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Players/ChessPlayer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/BoardUI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52173ca6843e51e82dc42a61868a2d712bf326f61d9e38419ed77568a1a97f2/Math.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Documents/dor/Downloads/MyBot (1).cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Documents/dor/Downloads/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -216,7 +216,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
