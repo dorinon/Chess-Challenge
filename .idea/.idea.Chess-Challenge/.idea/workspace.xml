@@ -7,8 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="MVV-LVA optimized">
+    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="added Transposition table and increased search depth to 4">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,9 +43,13 @@
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52173ca6843e51e82dc42a61868a2d712bf326f61d9e38419ed77568a1a97f2/Math.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/749e65e52170df446c91b6e9b5566f17abb2611249e45719db82d8568ba5616/UInt16.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d82e70c4654f974cc6248aad1cee512afee4f94673ee55f686398dd368e0b9d3/Array.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/de7177e8a31c1e501222daf218f2e9532ff54cdb767595dc7e94cc73c8e95f1/Int32.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Documents/dor/Downloads/MyBot (1).cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Documents/dor/Downloads/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -221,7 +226,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690531494036</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added Transposition table and increased search depth to 4">
+      <option name="closed" value="true" />
+      <created>1690536493147</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1690536493147</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,7 +279,8 @@
     <MESSAGE value="added changes from up stream manually" />
     <MESSAGE value="changed ui" />
     <MESSAGE value="MVV-LVA optimized" />
-    <option name="LAST_COMMIT_MESSAGE" value="MVV-LVA optimized" />
+    <MESSAGE value="added Transposition table and increased search depth to 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Transposition table and increased search depth to 4" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

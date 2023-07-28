@@ -82,10 +82,13 @@ namespace ChessChallenge.Application
         {
             trueTotalMovesPlayed += totalMovesPlayed;
             totalMovesPlayed = 0;
+            if (trueTotalMovesPlayed > 2500)
+            {
+                totalMovesPlayed = 0;
+            }
             // End any ongoing game
             EndGame(GameResult.DrawByArbiter, log: false, autoStartNextBotMatch: false);
             gameID = rng.Next();
-
             // Stop prev task and create a new one
             if (RunBotsOnSeparateThread)
             {
