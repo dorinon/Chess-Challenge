@@ -109,6 +109,7 @@ public class MyBot : IChessBot
          int preBestScore = -999999;
          usedTT = 0;
          int score;
+         //TODO: find way to salvage last search result if it is interrupted
          for (int i = 1; i < 50; i++)
          {
              score = Search(i, -30000, 30000, board.IsWhiteToMove ? 1 : -1, 0, timer);
