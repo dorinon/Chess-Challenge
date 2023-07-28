@@ -18,7 +18,7 @@ public class MyBot : IChessBot
             key = _key; depth = _depth; score = _score; bound = _bound; bestMove = _bestMove;
         }
     }
-    const int entries = 1<<21;
+    const int entries = 2^22 - 3;
     // Transposition table
     TTEntry[] tt = new TTEntry[entries];
     
