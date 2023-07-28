@@ -34,14 +34,14 @@ public class MyBot : IChessBot
         Move[] moves = board.GetLegalMoves(qsearch);
         int[] scores = new int[moves.Length];
         
-        if (board.IsInsufficientMaterial() || board.IsRepeatedPosition() || board.FiftyMoveCounter >= 100) return 50;                                      
-        if (board.GetLegalMoves().Length == 0) return board.IsInCheck() ? -29000 - depth : 0;
+        if (board.IsInsufficientMaterial() || board.IsRepeatedPosition()) return 50;                                      
+        if (board.GetLegalMoves().Length == 0) return board.IsInCheck() ? -29000 + ply : 0;
         
         TTEntry entry = tt[key % entries];
         if (notRoot && entry.key == key && (entry.bound == 3 || entry.bound == 2 && entry.score >= beta || entry.bound == 1 && entry.score <= alpha))
         {
-            if (entry.depth >= depth) return entry.score;
             usedTT++;
+            if (entry.depth >= depth) return entry.score;
         }
         
         if (qsearch)
@@ -60,9 +60,8 @@ public class MyBot : IChessBot
             }
         }
         Array.Sort(scores, moves);
-        Array.Reverse(moves);
         // Generate and loop through all legal moves for the current player
-        for (int i = 0; moves.Length > i; i++)
+        for (int i = moves.Length - 1; -1 < i; i--)
         {
             if (timer.MillisecondsElapsedThisTurn >= timer.MillisecondsRemaining / 30) return 30000;
             Move move = moves[i];
@@ -105,21 +104,20 @@ public class MyBot : IChessBot
     public Move Think(Board board, Timer timer)
      {
          this.board = board;
-         Move preBestMove = Move.NullMove;
          int preBestScore = -999999;
          usedTT = 0;
          int score;
-         //TODO: find way to salvage last search result if it is interrupted
+         int depth = 0;
+         // Iterative deepening loop
          for (int i = 1; i < 50; i++)
          {
              score = Search(i, -30000, 30000, board.IsWhiteToMove ? 1 : -1, 0, timer);
-             
+             depth = i;
              if (timer.MillisecondsElapsedThisTurn >= timer.MillisecondsRemaining / 30) break;
-             preBestMove = bestMove;
              preBestScore = score;
          }
          // Call the Minimax algorithm to find the best move
-         Console.WriteLine(preBestMove + "  " + preBestScore + " is white turn: " + board.IsWhiteToMove + " number of TT entries used: " + usedTT);
-         return preBestMove;
+         Console.WriteLine(bestMove + "  " + preBestScore + " is white turn: " + board.IsWhiteToMove + " depth reached: " + depth + " " + " number of TT entries used: " + usedTT);
+         return bestMove;
      }
 }
