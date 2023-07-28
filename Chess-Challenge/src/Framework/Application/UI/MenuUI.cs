@@ -36,6 +36,10 @@ namespace ChessChallenge.Application
             {
                 controller.StartNewBotMatch(ChallengeController.PlayerType.MyBot, ChallengeController.PlayerType.NegamaxBot);
             }
+            if (NextButtonInRow("MyBot vs MyBotV2", ref buttonPos, spacing, buttonSize))
+            {
+                controller.StartNewBotMatch(ChallengeController.PlayerType.MyBot, ChallengeController.PlayerType.MyBotV2);
+            }
 
             // Page buttons
             buttonPos.Y += breakSpacing;
