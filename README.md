@@ -6,17 +6,16 @@ Negamax
 Alpha beta pruning  
 Quiescence Search  
 MVV-LVA  
-
+Iterative Deepening  
+Transposition Table  
+Best-First (captures + Hash move)  
 
 ## Evaluation
 Material  
 Mobility
 
 ## future features
-Iterative Deepening  
-Transposition Table  
-Best-First  
 Piece-Square Tables  
 Pawn Structure  
 Center Control  
-King Safety  
+King Safety 
