@@ -13,7 +13,7 @@ namespace Chess_Challenge.Cli
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Sebastian Lague's Chess Challenge");
+            Console.WriteLine("Sebastian Lague's Chess Challenge UCI interface by Gediminas Masaitis");
             var (totalTokens, debugTokens) = GetTokenCount();
             var tokensWithoutDebug = totalTokens - debugTokens;
             Console.WriteLine($"Current token count: {tokensWithoutDebug} ({totalTokens} total, {debugTokens} debug)");
