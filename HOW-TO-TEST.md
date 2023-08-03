@@ -70,7 +70,7 @@ Linux users will probably know how to translate this to their own format.
 
 **Key things to keep in mind**:
 * Set `concurrency` to the number of physical cores you have, not the number of threads you have.
-* Alwaus set `-games 2` and `-repeat`, this will ensure that each position in the opening book gets played twice, with each engine switching black/white.
+* Always set `-games 2` and `-repeat`, this will ensure that each position in the opening book gets played twice, with each engine switching black/white.
 
 Open a terminal and navigate to where CuteChess is installed. Run the script. You will see the output of game result.
 
