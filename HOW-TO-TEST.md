@@ -66,6 +66,8 @@ cutechess-cli.exe ^
 -openings file="C:\\Chess\\Suites\\UHO_XXL_+0.90_+1.19.epd" format=epd ^
 ```
 
+Refer to `cutechess-cli.exe --help` for info about each parameter.
+
 Linux users will probably know how to translate this to their own format.
 
 **Key things to keep in mind**:
