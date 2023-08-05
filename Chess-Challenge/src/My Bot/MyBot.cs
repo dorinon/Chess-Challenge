@@ -43,8 +43,7 @@ public class MyBot : IChessBot
     };
     public MyBot()
     {
-        for (int i = 0; i < 64 * 12; i++) psts[i] = (int)((int)(((BigInteger)quantizedArray[i / 12] >> (i % 12 * 8)) & 255) * 1.461f);
-
+        for (int i = 0; i < 64 * 12; i++) psts[i] = (int)((int)(((BigInteger)quantizedArray[i / 12] >> (i % 12 * 8)) & 255) * 1.461f) + PieceValues[i % 12];
     }
     int usedTT;//#DEBUG
     // Transposition table entry
@@ -56,22 +55,22 @@ public class MyBot : IChessBot
     // Negamax algorithm with alpha-beta pruning
     private int Search(int depth, int alpha, int beta, int color, int ply, Timer timer)
     {
-        ulong key = board.ZobristKey;
-        bool qsearch = depth <= 0, notRoot = ply > 0;
+        bool qsearch = depth <= 0, notRoot = ply > 0, isInCheck = board.IsInCheck();
+        
+        if (board.IsRepeatedPosition()) return 0;                                      
+        if (board.GetLegalMoves().Length == 0) return isInCheck ? -29000 + ply : 0;
+        
         int bestEval = -30000, eval, origAlpha = alpha;
-        Move[] moves = board.GetLegalMoves(qsearch);
-        int[] scores = new int[moves.Length];
-        
-        if (board.IsInsufficientMaterial() || board.IsRepeatedPosition()) return 50;                                      
-        if (board.GetLegalMoves().Length == 0) return board.IsInCheck() ? -29000 + ply : 0;
-        
+        ulong key = board.ZobristKey;
         TTEntry entry = _tt[key % Entries];
+        
         if (notRoot && entry.Key == key && entry.Depth >= depth && (entry.Bound == 3 || entry.Bound == 2 && entry.Score >= beta || entry.Bound == 1 && entry.Score <= alpha))
         {//#DEBUG
             usedTT++;//#DEBUG
             return entry.Score;
         }//#DEBUG
-        
+
+        if (isInCheck) depth++;
         if (qsearch)
         {
             bestEval = Evaluate(color);
@@ -79,20 +78,20 @@ public class MyBot : IChessBot
             if(bestEval >= beta || depth < -10) return bestEval;
         }
         
-        for(int i = 0; i < moves.Length; i++) {
-            Move move = moves[i];
-            if(move.IsCapture) scores[i] = 20 * (int)move.CapturePieceType - (int)move.MovePieceType;
-            if (move.RawValue == entry.Move) scores[i] = 1000000;
-        }
-        Array.Sort(scores, moves);
+        Move[] moves = board.GetLegalMoves(qsearch && !isInCheck).
+            OrderByDescending(move => move.RawValue == entry.Move ? 100000 : 
+                move.IsCapture ? 20 * (int)move.CapturePieceType - (int)move.MovePieceType : 0).ToArray();
         // Generate and loop through all legal moves for the current player
-        for (int i = moves.Length - 1; -1 < i; i--)
+        for (int i = 0; i < moves.Length; i++)
         {
             if (timer.MillisecondsElapsedThisTurn >= timer.MillisecondsRemaining / 30) return 30000;
             Move move = moves[i];
             // Make the move on a temporary board and call search recursively
             board.MakeMove(move);
-            eval = -Search(depth -1, -beta, -alpha, -color, ply+1, timer);
+            bool windowSearch = i == 0 && !qsearch && !isInCheck;
+            eval = -Search(depth -1, windowSearch ? -alpha - 1 : -beta, -alpha, -color, ply+1, timer);
+            if (windowSearch && eval > alpha)
+                eval = -Search(depth - 1, -beta, -alpha, -color, ply + 1, timer);
             board.UndoMove(move);
 
             // Update the best move and prune if necessary
@@ -126,8 +125,8 @@ public class MyBot : IChessBot
                 while (bb != 0)
                 {
                     int square = BitboardHelper.ClearAndGetIndexOfLSB(ref bb) ^ (stm ? 56 : 0);
-                    middleGame += PieceValues[pieceType] + psts[square * 12 + pieceType];
-                    endGame += PieceValues[pieceType + 6] + psts[square * 12 + pieceType + 6];
+                    middleGame += psts[square * 12 + pieceType];
+                    endGame += psts[square * 12 + pieceType + 6];
                     
                     gamePhase += gamePhaseInc[pieceType];
                 }
@@ -155,7 +154,7 @@ public class MyBot : IChessBot
              preBestScore = score;
          }
          // Call the Minimax algorithm to find the best move
-         Console.WriteLine(bestMove + "  " + preBestScore + " is white turn: " + board.IsWhiteToMove + " depth reached: " + depth + " " + " number of TT entries used: " + usedTT);//#DEBUG
+         Console.WriteLine(bestMove + "  " + preBestScore + " is white turn: " + board.IsWhiteToMove + "  depth reached: " + depth + " " + " number of TT entries used: " + usedTT);//#DEBUG
          return bestMove;
      }
 }
