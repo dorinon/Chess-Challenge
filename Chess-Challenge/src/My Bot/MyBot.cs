@@ -49,7 +49,7 @@ public class MyBot : IChessBot
     int usedTT;//#DEBUG
     // Transposition table entry
     record struct TTEntry(ulong Key, int Score, ushort Move, int Depth, int Bound);
-    const int Entries = 2^22 - 3;
+    const int Entries = 0x3FFFFF - 3;
     // Transposition table
     TTEntry[] _tt = new TTEntry[Entries];
     
