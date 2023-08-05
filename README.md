@@ -9,13 +9,14 @@ MVV-LVA
 Iterative Deepening  
 Transposition Table  
 Best-First (captures + Hash move)  
+Aspiration Windows
 
 ## Evaluation
 Material  
 Mobility
+Piece-Square Tables  
+Center Control  
 
 ## future features
-Piece-Square Tables  
 Pawn Structure  
-Center Control  
 King Safety 
