@@ -7,9 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="psts eval working needs optimisation depth reached dropped to around 6-5">
+    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +29,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/227ed75384c24c09bd6a4ae4ff4c1534a23898/26/fd56d163/BitOperations.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e753975036bb446da25cf03bafe6f35014e00/4c/2c71ecc8/Raylib.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52173ca6843e51e82dc42a61868a2d712bf326f61d9e38419ed77568a1a97f2/Math.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/749e65e52170df446c91b6e9b5566f17abb2611249e45719db82d8568ba5616/UInt16.cs" root0="SKIP_HIGHLIGHTING" />
@@ -51,29 +57,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "two.files.diff.last.used.file": "C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;D:\\Documents\\dor\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;D:\\Documents\\dor\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Dor\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "D:\\Documents\\dor\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "D:\\Documents\\dor\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\Dor\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Chess-Challenge" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -114,7 +121,7 @@
       <workItem from="1691133339274" duration="3087000" />
       <workItem from="1691148758034" duration="3272000" />
       <workItem from="1691160816422" duration="2089000" />
-      <workItem from="1691217998775" duration="3856000" />
+      <workItem from="1691217998775" duration="10669000" />
     </task>
     <task id="LOCAL-00001" summary="added minimax search with alpha beta pruning the pruning has a bug I cant figure out!!!">
       <option name="closed" value="true" />
@@ -276,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691220593545</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="optimized TT token use">
+      <option name="closed" value="true" />
+      <created>1691222041387</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1691222041387</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +309,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="upstream/HEAD" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -328,32 +343,26 @@
     <MESSAGE value="changed number of entries to a prime number" />
     <MESSAGE value="fixed not getting last depth loop best move" />
     <MESSAGE value="psts eval working needs optimisation depth reached dropped to around 6-5" />
-    <option name="LAST_COMMIT_MESSAGE" value="psts eval working needs optimisation depth reached dropped to around 6-5" />
+    <MESSAGE value="optimized TT token use" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimized TT token use" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs</url>
-          <line>129</line>
-          <properties documentPath="C:\Users\Dor\RiderProjects\ChessBot\Chess-Challenge\src\My Bot\MyBot.cs" initialLine="140" containingFunctionPresentation="Method 'Evaluate'">
+          <line>132</line>
+          <properties documentPath="C:\Users\Dor\RiderProjects\ChessBot\Chess-Challenge\src\My Bot\MyBot.cs" initialLine="132" containingFunctionPresentation="Method 'Evaluate'">
             <startOffsets>
-              <option value="6554" />
+              <option value="6657" />
             </startOffsets>
             <endOffsets>
-              <option value="6597" />
+              <option value="6658" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="5" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="DotNetProject">
-        <watch expression="pieceLists" />
-        <watch expression="pieceLists" />
-        <watch expression="pieceLists" language="C#" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

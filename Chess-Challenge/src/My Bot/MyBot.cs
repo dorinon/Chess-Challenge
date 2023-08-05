@@ -16,7 +16,7 @@ public class MyBot : IChessBot
                             92, 251, 323, 505, 957, 29926}; // Endgame
 
      private short[] gamePhaseInc = {0, 1, 1, 2, 4, 0};
-     int[] psts = new int[64 * 12];
+     private int[] psts = new int[64 * 12];
      decimal[] quantizedArray = {
         27909335506732266436165655m,  8099897515490484006734673175m,  11813746079450960178425387799m,
         11817358744429988596699516951m,  13364774348659602364205341719m,  18619974868293840544160493335m,
@@ -41,8 +41,10 @@ public class MyBot : IChessBot
         9625514824545891310680106519m,  12697366905970192825153707799m,  10540700058164212799285060887m,
         6500394244407116926542242327m
     };
-    public MyBot() {
+    public MyBot()
+    {
         for (int i = 0; i < 64 * 12; i++) psts[i] = (int)((int)(((BigInteger)quantizedArray[i / 12] >> (i % 12 * 8)) & 255) * 1.461f);
+
     }
     int usedTT;//#DEBUG
     // Transposition table entry
@@ -115,26 +117,27 @@ public class MyBot : IChessBot
     }
     private int Evaluate(int color)
     {
-        int[] middleGame = new int[2], endGame = new int[2];
-        int gamePhase = 0, materialValue, mobilityValue = board.GetLegalMoves().Length;
-        PieceList[] pieceLists = board.GetAllPieceLists();
-        for (int i = 0; i < 12; i++)
+        int gamePhase = 0, mobilityValue = board.GetLegalMoves().Length, middleGame = 0, endGame = 0;
+        foreach (bool stm in new []{true, false})
         {
-            int pieceType = i % 6;
-            int colour = i / 6;
-            middleGame[colour] += pieceLists[i].Count() * PieceValues[pieceType];
-            endGame[colour] += pieceLists[i].Count() * PieceValues[pieceType + 6];
-            gamePhase += pieceLists[i].Count() * gamePhaseInc[pieceType];
-            for (int j = 0; j < pieceLists[i].Count; j++)
+            for (int pieceType = -1; ++pieceType < 6;)
             {
-                int square = pieceLists[i][j].Square.Index;
-                middleGame[colour] +=  psts[12 * square + pieceType];
-                endGame[colour] += psts[12 * square + pieceType + 6];
+                ulong bb = board.GetPieceBitboard((PieceType)pieceType + 1, stm);
+                while (bb != 0)
+                {
+                    int square = BitboardHelper.ClearAndGetIndexOfLSB(ref bb) ^ (stm ? 56 : 0);
+                    middleGame += PieceValues[pieceType] + psts[square * 12 + pieceType];
+                    endGame += PieceValues[pieceType + 6] + psts[square * 12 + pieceType + 6];
+                    
+                    gamePhase += gamePhaseInc[pieceType];
+                }
             }
+            middleGame *= -1;
+            endGame *= -1;
         }
-        materialValue = ((middleGame[0] - middleGame[1]) * Math.Min(gamePhase, 24) + (endGame[0] - endGame[1]) * (24 - gamePhase)) / 24;
 
-        return materialValue * color + mobilityValue;
+        gamePhase = Math.Min(gamePhase, 24);
+        return (middleGame * gamePhase + endGame * (24 - gamePhase)) / 24 * color + mobilityValue;
     }
     public Move Think(Board board, Timer timer)
      {
