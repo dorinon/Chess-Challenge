@@ -7,10 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="added Transposition table and increased search depth to 4">
+    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge.exe - Shortcut.lnk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/API/Square.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/API/Square.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,28 +32,13 @@
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/Settings.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/Settings.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/Settings.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/BoardUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MatchStatsUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MatchStatsUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/UI/MenuUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52173ca6843e51e82dc42a61868a2d712bf326f61d9e38419ed77568a1a97f2/Math.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/749e65e52170df446c91b6e9b5566f17abb2611249e45719db82d8568ba5616/UInt16.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d82e70c4654f974cc6248aad1cee512afee4f94673ee55f686398dd368e0b9d3/Array.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/de7177e8a31c1e501222daf218f2e9532ff54cdb767595dc7e94cc73c8e95f1/Int32.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7e231682be8652744726acc6de35323daa68061429db55e0c251114902f60/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Documents/dor/Downloads/MyBot (1).cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Documents/dor/Downloads/MyBot.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -121,6 +110,14 @@
       <workItem from="1690013225468" duration="52579000" />
       <workItem from="1690360539756" duration="7611000" />
       <workItem from="1690460913703" duration="753000" />
+      <workItem from="1690709604068" duration="10171000" />
+      <workItem from="1691047211011" duration="7092000" />
+      <workItem from="1691069649064" duration="965000" />
+      <workItem from="1691132715882" duration="548000" />
+      <workItem from="1691133339274" duration="3087000" />
+      <workItem from="1691148758034" duration="3272000" />
+      <workItem from="1691160816422" duration="2089000" />
+      <workItem from="1691217998775" duration="2310000" />
     </task>
     <task id="LOCAL-00001" summary="added minimax search with alpha beta pruning the pruning has a bug I cant figure out!!!">
       <option name="closed" value="true" />
@@ -234,7 +231,47 @@
       <option name="project" value="LOCAL" />
       <updated>1690536493147</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Transposition table fully working with best search first">
+      <option name="closed" value="true" />
+      <created>1690542839570</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1690542839570</updated>
+    </task>
+    <task id="LOCAL-00016" summary="iterative deepening working">
+      <option name="closed" value="true" />
+      <created>1690545116959</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1690545116959</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added short cut to run manually">
+      <option name="closed" value="true" />
+      <created>1690546115632</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1690546115632</updated>
+    </task>
+    <task id="LOCAL-00018" summary="changed number of entries to a prime number">
+      <option name="closed" value="true" />
+      <created>1690546675796</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1690546675796</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fixed not getting last depth loop best move">
+      <option name="closed" value="true" />
+      <created>1690552104064</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1690552104064</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +289,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="upstream/main" />
                       </list>
                     </value>
                   </entry>
@@ -280,13 +317,36 @@
     <MESSAGE value="changed ui" />
     <MESSAGE value="MVV-LVA optimized" />
     <MESSAGE value="added Transposition table and increased search depth to 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Transposition table and increased search depth to 4" />
+    <MESSAGE value="Transposition table fully working with best search first" />
+    <MESSAGE value="iterative deepening working" />
+    <MESSAGE value="added short cut to run manually" />
+    <MESSAGE value="changed number of entries to a prime number" />
+    <MESSAGE value="fixed not getting last depth loop best move" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed not getting last depth loop best move" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs</url>
+          <line>140</line>
+          <properties documentPath="C:\Users\Dor\RiderProjects\ChessBot\Chess-Challenge\src\My Bot\MyBot.cs" initialLine="140" containingFunctionPresentation="Method 'Evaluate'">
+            <startOffsets>
+              <option value="6821" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6864" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="DotNetProject">
         <watch expression="pieceLists" />
         <watch expression="pieceLists" />
+        <watch expression="pieceLists" language="C#" />
       </configuration>
     </watches-manager>
   </component>
