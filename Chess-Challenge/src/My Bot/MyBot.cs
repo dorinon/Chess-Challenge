@@ -44,16 +44,9 @@ public class MyBot : IChessBot
     public MyBot() {
         for (int i = 0; i < 64 * 12; i++) psts[i] = (int)((int)(((BigInteger)quantizedArray[i / 12] >> (i % 12 * 8)) & 255) * 1.461f);
     }
-    int usedTT;
+    int usedTT;//#DEBUG
     // Transposition table entry
-    struct TTEntry {
-        public ulong key;
-        public ushort bestMove;
-        public int depth, score, bound;
-        public TTEntry(ulong _key, int _depth, int _score, int _bound, ushort _bestMove) {
-            key = _key; depth = _depth; score = _score; bound = _bound; bestMove = _bestMove;
-        }
-    }
+    record struct TTEntry(ulong Key, int Score, ushort Move, int Depth, int Bound);
     const int Entries = 2^22 - 3;
     // Transposition table
     TTEntry[] _tt = new TTEntry[Entries];
@@ -71,11 +64,11 @@ public class MyBot : IChessBot
         if (board.GetLegalMoves().Length == 0) return board.IsInCheck() ? -29000 + ply : 0;
         
         TTEntry entry = _tt[key % Entries];
-        if (notRoot && entry.key == key && (entry.bound == 3 || entry.bound == 2 && entry.score >= beta || entry.bound == 1 && entry.score <= alpha))
-        {
-            usedTT++;
-            if (entry.depth >= depth) return entry.score;
-        }
+        if (notRoot && entry.Key == key && entry.Depth >= depth && (entry.Bound == 3 || entry.Bound == 2 && entry.Score >= beta || entry.Bound == 1 && entry.Score <= alpha))
+        {//#DEBUG
+            usedTT++;//#DEBUG
+            return entry.Score;
+        }//#DEBUG
         
         if (qsearch)
         {
@@ -87,10 +80,7 @@ public class MyBot : IChessBot
         for(int i = 0; i < moves.Length; i++) {
             Move move = moves[i];
             if(move.IsCapture) scores[i] = 20 * (int)move.CapturePieceType - (int)move.MovePieceType;
-            if (move.RawValue == entry.bestMove)
-            {
-                scores[i] = 1000000;
-            }
+            if (move.RawValue == entry.Move) scores[i] = 1000000;
         }
         Array.Sort(scores, moves);
         // Generate and loop through all legal moves for the current player
@@ -114,13 +104,12 @@ public class MyBot : IChessBot
                 
                 if (alpha >= beta) break;
             }
-            
         }
         // Did we fail high/low or get an exact score?
         int bound = bestEval >= beta ? 2 : bestEval > origAlpha ? 3 : 1;
 
         // Push to TT
-        _tt[key % Entries] = new TTEntry(key, depth, bestEval, bound, bestMove.RawValue);
+        _tt[key % Entries] = new TTEntry(key, bestEval, bestMove.RawValue, depth, bound);
         
         return bestEval;
     }
@@ -151,19 +140,19 @@ public class MyBot : IChessBot
      {
          this.board = board;
          int preBestScore = -999999;
-         usedTT = 0;
+         usedTT = 0;//#DEBUG
          int score;
-         int depth = 0;
+         int depth = 0;//#DEBUG
          // Iterative deepening loop
          for (int i = 1; i < 50; i++)
          {
              score = Search(i, -30000, 30000, board.IsWhiteToMove ? 1 : -1, 0, timer);
-             depth = i;
+             depth = i;//#DEBUG
              if (timer.MillisecondsElapsedThisTurn >= timer.MillisecondsRemaining / 30) break;
              preBestScore = score;
          }
          // Call the Minimax algorithm to find the best move
-         Console.WriteLine(bestMove + "  " + preBestScore + " is white turn: " + board.IsWhiteToMove + " depth reached: " + depth + " " + " number of TT entries used: " + usedTT);
+         Console.WriteLine(bestMove + "  " + preBestScore + " is white turn: " + board.IsWhiteToMove + " depth reached: " + depth + " " + " number of TT entries used: " + usedTT);//#DEBUG
          return bestMove;
      }
 }

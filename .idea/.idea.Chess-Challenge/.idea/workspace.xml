@@ -7,14 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_1.xml" beforeDir="false" />
+    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="psts eval working needs optimisation depth reached dropped to around 6-5">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge.exe - Shortcut.lnk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/API/Square.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/API/Square.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +28,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/Framework/Application/Core/ChallengeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52173ca6843e51e82dc42a61868a2d712bf326f61d9e38419ed77568a1a97f2/Math.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/749e65e52170df446c91b6e9b5566f17abb2611249e45719db82d8568ba5616/UInt16.cs" root0="SKIP_HIGHLIGHTING" />
@@ -117,7 +114,7 @@
       <workItem from="1691133339274" duration="3087000" />
       <workItem from="1691148758034" duration="3272000" />
       <workItem from="1691160816422" duration="2089000" />
-      <workItem from="1691217998775" duration="2310000" />
+      <workItem from="1691217998775" duration="3856000" />
     </task>
     <task id="LOCAL-00001" summary="added minimax search with alpha beta pruning the pruning has a bug I cant figure out!!!">
       <option name="closed" value="true" />
@@ -271,7 +268,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690552104064</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="psts eval working needs optimisation depth reached dropped to around 6-5">
+      <option name="closed" value="true" />
+      <created>1691220593545</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1691220593545</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,7 +294,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="upstream/main" />
+                        <option value="upstream/HEAD" />
                       </list>
                     </value>
                   </entry>
@@ -322,20 +327,21 @@
     <MESSAGE value="added short cut to run manually" />
     <MESSAGE value="changed number of entries to a prime number" />
     <MESSAGE value="fixed not getting last depth loop best move" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed not getting last depth loop best move" />
+    <MESSAGE value="psts eval working needs optimisation depth reached dropped to around 6-5" />
+    <option name="LAST_COMMIT_MESSAGE" value="psts eval working needs optimisation depth reached dropped to around 6-5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs</url>
-          <line>140</line>
+          <line>129</line>
           <properties documentPath="C:\Users\Dor\RiderProjects\ChessBot\Chess-Challenge\src\My Bot\MyBot.cs" initialLine="140" containingFunctionPresentation="Method 'Evaluate'">
             <startOffsets>
-              <option value="6821" />
+              <option value="6554" />
             </startOffsets>
             <endOffsets>
-              <option value="6864" />
+              <option value="6597" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
