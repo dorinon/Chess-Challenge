@@ -8,13 +8,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="added aspiration windows">
+    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="psts optimized">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge.Uci/Uci.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge.Uci/Uci.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/elo Bot/NegamaxBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/elo Bot/NegamaxBot.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +144,7 @@
       <workItem from="1691245961671" duration="11796000" />
       <workItem from="1691297692015" duration="835000" />
       <workItem from="1691816524640" duration="6570000" />
-      <workItem from="1691913937230" duration="1370000" />
+      <workItem from="1691913937230" duration="2564000" />
     </task>
     <task id="LOCAL-00001" summary="added minimax search with alpha beta pruning the pruning has a bug I cant figure out!!!">
       <option name="closed" value="true" />
@@ -326,7 +322,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691250933496</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="psts optimized">
+      <option name="closed" value="true" />
+      <created>1691915566274</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1691915566274</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,7 +384,8 @@
     <MESSAGE value="psts eval working needs optimisation depth reached dropped to around 6-5" />
     <MESSAGE value="optimized TT token use" />
     <MESSAGE value="added aspiration windows" />
-    <option name="LAST_COMMIT_MESSAGE" value="added aspiration windows" />
+    <MESSAGE value="psts optimized" />
+    <option name="LAST_COMMIT_MESSAGE" value="psts optimized" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

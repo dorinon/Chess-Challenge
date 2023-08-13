@@ -7,8 +7,7 @@ using Microsoft.VisualBasic.CompilerServices;
 
 public class MyBot : IChessBot
 {
-    Move bestMove;
-    Board board;
+    Move _bestMove;
     
     // Point values for each piece type for evaluation
     //removed the minimum ps to stabilize with pst
@@ -53,7 +52,7 @@ public class MyBot : IChessBot
     TTEntry[] _tt = new TTEntry[Entries];
     
     // Negamax algorithm with alpha-beta pruning
-    private int Search(int depth, int alpha, int beta, int color, int ply, Timer timer)
+    private int Search(Board board, Timer timer, int depth, int alpha, int beta, int color, int ply)
     {
         nodes++;//#DEBUG
         bool qsearch = depth <= 0, notRoot = ply > 0, isInCheck = board.IsInCheck();
@@ -68,11 +67,12 @@ public class MyBot : IChessBot
         if (notRoot && entry.Key == key && entry.Depth >= depth && (entry.Bound == 3 || entry.Bound == 2 && entry.Score >= beta || entry.Bound == 1 && entry.Score <= alpha))
             return entry.Score;
         
+        if (isInCheck) depth++;
+
         if (qsearch)
         {
-            bestEval = Evaluate(color);
+            bestEval = Evaluate(board);
             //eval is StandPat
-            if (isInCheck) depth++;
             if(bestEval >= beta) return bestEval;
         }
         
@@ -87,16 +87,16 @@ public class MyBot : IChessBot
             // Make the move on a temporary board and call search recursively
             board.MakeMove(move);
             bool windowSearch = i == 0 && !qsearch;
-            eval = -Search(depth -1, windowSearch ? -alpha - 1 : -beta, -alpha, -color, ply+1, timer);
+            eval = -Search(board, timer,depth -1, windowSearch ? -alpha - 1 : -beta, -alpha, -color, ply+1);
             if (windowSearch && eval > alpha)
-                eval = -Search(depth - 1, -beta, -alpha, -color, ply + 1, timer);
+                eval = -Search(board, timer, depth - 1, -beta, -alpha, -color, ply + 1);
             board.UndoMove(move);
 
             // Update the best move and prune if necessary
             if (eval > bestEval)
             {
                 bestEval = eval;
-                if (!notRoot) bestMove = move;
+                if (!notRoot) _bestMove = move;
                 
                 // Improve alpha
                 alpha = Math.Max(alpha, eval);
@@ -108,14 +108,13 @@ public class MyBot : IChessBot
         int bound = bestEval >= beta ? 2 : bestEval > origAlpha ? 3 : 1;
 
         // Push to TT
-        _tt[key % Entries] = new TTEntry(key, bestEval, bestMove.RawValue, depth, bound);
+        _tt[key % Entries] = new TTEntry(key, bestEval, _bestMove.RawValue, depth, bound);
         
         return bestEval;
     }
-    private int Evaluate(int color)
+    private int Evaluate(Board board)
     {
         int mg = 0, eg = 0, phase = 0;
-        
         foreach (bool stm in new []{true, false}) {
             for(var p = 1; p <= 6; p++) {
                 int ind;
@@ -132,26 +131,24 @@ public class MyBot : IChessBot
             mg = -mg;
             eg = -eg;
         }
-
         phase = Math.Min(phase, 24);
-        return (mg * phase + eg * (24 - phase)) / 24 * color;
+        return (mg * phase + eg * (24 - phase)) / 24 * (board.IsWhiteToMove ? 1 : -1);
     }
-    public Move Think(Board _board, Timer timer)
+    public Move Think(Board board, Timer timer)
      {
-         board = _board;
-         nodes = 0;//#DEBUG
+         nodes = 1;//#DEBUG
          int prevScore = -50000;//#DEBUG
          int depth = 0;//#DEBUG
          // Iterative deepening loop
          for (int i = 1; i < 50; i++)
          {
-             int score = Search(i, -30000, 30000, board.IsWhiteToMove ? 1 : -1, 0, timer);
+             int score = Search(board, timer, i, -30000, 30000, board.IsWhiteToMove ? 1 : -1, 0);
              depth = i;//#DEBUG
              if (timer.MillisecondsElapsedThisTurn >= timer.MillisecondsRemaining / 30) break;
              prevScore = score;//#DEBUG
          }
          // Call the Minimax algorithm to find the best move
-         Console.WriteLine("score:  {0,2} move: {1,4} color: {2,5} nps: {3,9} depth: {4,2}", prevScore, bestMove, board.IsWhiteToMove ? "white" : "black", nodes/(timer.MillisecondsElapsedThisTurn / 1000), depth);//#DEBUG
-         return bestMove;
+         Console.WriteLine("score:  {0,2} move: {1,4} color: {2,5} nps: {3,9} depth: {4,2}", prevScore, _bestMove, board.IsWhiteToMove ? "white" : "black", nodes/((float)timer.MillisecondsElapsedThisTurn / 1000), depth);//#DEBUG
+         return _bestMove;
      }
 }
