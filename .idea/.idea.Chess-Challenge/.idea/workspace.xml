@@ -8,10 +8,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/shelf/Uncommitted_changes_before_Checkout_at_26_07_2023_19_10__Changes_.xml" afterDir="false" />
+    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="added aspiration windows">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge.Uci/Uci.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge.Uci/Uci.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBotV2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/elo Bot/NegamaxBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/elo Bot/NegamaxBot.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +37,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e753975036bb446da25cf03bafe6f35014e00/4c/2c71ecc8/Raylib.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52173ca6843e51e82dc42a61868a2d712bf326f61d9e38419ed77568a1a97f2/Math.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/749e65e52170df446c91b6e9b5566f17abb2611249e45719db82d8568ba5616/UInt16.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d82e70c4654f974cc6248aad1cee512afee4f94673ee55f686398dd368e0b9d3/Array.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/de7177e8a31c1e501222daf218f2e9532ff54cdb767595dc7e94cc73c8e95f1/Int32.cs" root0="SKIP_HIGHLIGHTING" />
@@ -65,7 +69,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;SolutionBuilderGeneralOptionsPage&quot;,
     &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/Dor/RiderProjects/ChessBot/Chess-Challenge/src/My Bot/MyBot.cs&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -141,7 +145,10 @@
       <workItem from="1691148758034" duration="3272000" />
       <workItem from="1691160816422" duration="2089000" />
       <workItem from="1691217998775" duration="10669000" />
-      <workItem from="1691245961671" duration="4535000" />
+      <workItem from="1691245961671" duration="11796000" />
+      <workItem from="1691297692015" duration="835000" />
+      <workItem from="1691816524640" duration="6570000" />
+      <workItem from="1691913937230" duration="1370000" />
     </task>
     <task id="LOCAL-00001" summary="added minimax search with alpha beta pruning the pruning has a bug I cant figure out!!!">
       <option name="closed" value="true" />
@@ -311,7 +318,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691222041387</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added aspiration windows">
+      <option name="closed" value="true" />
+      <created>1691250933496</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1691250933496</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,7 +344,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -364,6 +379,15 @@
     <MESSAGE value="fixed not getting last depth loop best move" />
     <MESSAGE value="psts eval working needs optimisation depth reached dropped to around 6-5" />
     <MESSAGE value="optimized TT token use" />
-    <option name="LAST_COMMIT_MESSAGE" value="optimized TT token use" />
+    <MESSAGE value="added aspiration windows" />
+    <option name="LAST_COMMIT_MESSAGE" value="added aspiration windows" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#MyBot" memberName="nodes" />
+        <PinnedItemInfo parentTag="Frame#MyBot.Think" memberName="timer" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

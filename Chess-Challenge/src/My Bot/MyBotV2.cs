@@ -16,7 +16,7 @@ public class MyBotV2 : IChessBot
                             92, 251, 323, 505, 957, 29926}; // Endgame
 
      private short[] gamePhaseInc = {0, 1, 1, 2, 4, 0};
-     int[] psts = new int[64 * 12];
+     private int[] psts = new int[64 * 12];
      decimal[] quantizedArray = {
         27909335506732266436165655m,  8099897515490484006734673175m,  11813746079450960178425387799m,
         11817358744429988596699516951m,  13364774348659602364205341719m,  18619974868293840544160493335m,
@@ -41,35 +41,36 @@ public class MyBotV2 : IChessBot
         9625514824545891310680106519m,  12697366905970192825153707799m,  10540700058164212799285060887m,
         6500394244407116926542242327m
     };
-    public MyBotV2() {
-        for (int i = 0; i < 64 * 12; i++) psts[i] = (int)((int)(((BigInteger)quantizedArray[i / 12] >> (i % 12 * 8)) & 255) * 1.461f);
+    public MyBotV2()
+    {
+        for (int i = 0; i < 64 * 12; i++) psts[i] = (int)((int)(((BigInteger)quantizedArray[i / 12] >> (i % 12 * 8)) & 255) * 1.461f) + PieceValues[i % 12];
     }
-    int usedTT;//#DEBUG
+    int nodes;//#DEBUG
     // Transposition table entry
     record struct TTEntry(ulong Key, int Score, ushort Move, int Depth, int Bound);
-    const int Entries = 2^22 - 3;
+    const int Entries = 0x3FFFFF - 3;
     // Transposition table
     TTEntry[] _tt = new TTEntry[Entries];
     
     // Negamax algorithm with alpha-beta pruning
     private int Search(int depth, int alpha, int beta, int color, int ply, Timer timer)
     {
-        ulong key = board.ZobristKey;
-        bool qsearch = depth <= 0, notRoot = ply > 0;
+        nodes++;//#DEBUG
+        bool qsearch = depth <= 0, notRoot = ply > 0, isInCheck = board.IsInCheck();
+        
+        if (board.IsRepeatedPosition()) return 0;                                      
+        if (board.GetLegalMoves().Length == 0) return isInCheck ? -29000 + ply : 0;
+        
         int bestEval = -30000, eval, origAlpha = alpha;
-        Move[] moves = board.GetLegalMoves(qsearch);
-        int[] scores = new int[moves.Length];
-        
-        if (board.IsInsufficientMaterial() || board.IsRepeatedPosition()) return 50;                                      
-        if (board.GetLegalMoves().Length == 0) return board.IsInCheck() ? -29000 + ply : 0;
-        
+        ulong key = board.ZobristKey;
         TTEntry entry = _tt[key % Entries];
+        
         if (notRoot && entry.Key == key && entry.Depth >= depth && (entry.Bound == 3 || entry.Bound == 2 && entry.Score >= beta || entry.Bound == 1 && entry.Score <= alpha))
         {//#DEBUG
-            usedTT++;//#DEBUG
             return entry.Score;
         }//#DEBUG
-        
+
+        if (isInCheck) depth++;
         if (qsearch)
         {
             bestEval = Evaluate(color);
@@ -77,20 +78,17 @@ public class MyBotV2 : IChessBot
             if(bestEval >= beta || depth < -10) return bestEval;
         }
         
-        for(int i = 0; i < moves.Length; i++) {
-            Move move = moves[i];
-            if(move.IsCapture) scores[i] = 20 * (int)move.CapturePieceType - (int)move.MovePieceType;
-            if (move.RawValue == entry.Move) scores[i] = 1000000;
-        }
-        Array.Sort(scores, moves);
+        Move[] moves = board.GetLegalMoves(qsearch && !isInCheck).
+            OrderByDescending(move => move.RawValue == entry.Move ? 100000 : 
+                move.IsCapture ? 20 * (int)move.CapturePieceType - (int)move.MovePieceType : 0).ToArray();
         // Generate and loop through all legal moves for the current player
-        for (int i = moves.Length - 1; -1 < i; i--)
+        for (int i = 0; i < moves.Length; i++)
         {
             if (timer.MillisecondsElapsedThisTurn >= timer.MillisecondsRemaining / 30) return 30000;
             Move move = moves[i];
             // Make the move on a temporary board and call search recursively
             board.MakeMove(move);
-            eval = -Search(depth -1, -beta, -alpha, -color, ply+1, timer);
+            eval = -Search(depth - 1, -beta, -alpha, -color, ply + 1, timer);
             board.UndoMove(move);
 
             // Update the best move and prune if necessary
@@ -115,32 +113,33 @@ public class MyBotV2 : IChessBot
     }
     private int Evaluate(int color)
     {
-        int[] middleGame = new int[2], endGame = new int[2];
-        int gamePhase = 0, materialValue, mobilityValue = board.GetLegalMoves().Length;
-        PieceList[] pieceLists = board.GetAllPieceLists();
-        for (int i = 0; i < 12; i++)
+        int gamePhase = 0, mobilityValue = board.GetLegalMoves().Length, middleGame = 0, endGame = 0;
+        foreach (bool stm in new []{true, false})
         {
-            int pieceType = i % 6;
-            int colour = i / 6;
-            middleGame[colour] += pieceLists[i].Count() * PieceValues[pieceType];
-            endGame[colour] += pieceLists[i].Count() * PieceValues[pieceType + 6];
-            gamePhase += pieceLists[i].Count() * gamePhaseInc[pieceType];
-            for (int j = 0; j < pieceLists[i].Count; j++)
+            for (int pieceType = -1; ++pieceType < 6;)
             {
-                int square = pieceLists[i][j].Square.Index;
-                middleGame[colour] +=  psts[12 * square + pieceType];
-                endGame[colour] += psts[12 * square + pieceType + 6];
+                ulong bb = board.GetPieceBitboard((PieceType)pieceType + 1, stm);
+                while (bb != 0)
+                {
+                    int square = BitboardHelper.ClearAndGetIndexOfLSB(ref bb) ^ (stm ? 56 : 0);
+                    middleGame += psts[square * 12 + pieceType];
+                    endGame += psts[square * 12 + pieceType + 6];
+                    
+                    gamePhase += gamePhaseInc[pieceType];
+                }
             }
+            middleGame *= -1;
+            endGame *= -1;
         }
-        materialValue = ((middleGame[0] - middleGame[1]) * Math.Min(gamePhase, 24) + (endGame[0] - endGame[1]) * (24 - gamePhase)) / 24;
 
-        return materialValue * color + mobilityValue;
+        gamePhase = Math.Min(gamePhase, 24);
+        return (middleGame * gamePhase + endGame * (24 - gamePhase)) / 24 * color + mobilityValue;
     }
     public Move Think(Board board, Timer timer)
      {
          this.board = board;
          int preBestScore = -999999;
-         usedTT = 0;//#DEBUG
+         nodes = 0;//#DEBUG
          int score;
          int depth = 0;//#DEBUG
          // Iterative deepening loop
@@ -152,7 +151,7 @@ public class MyBotV2 : IChessBot
              preBestScore = score;
          }
          // Call the Minimax algorithm to find the best move
-         Console.WriteLine(bestMove + "  " + preBestScore + " is white turn: " + board.IsWhiteToMove + " depth reached: " + depth + " " + " number of TT entries used: " + usedTT);//#DEBUG
+         Console.WriteLine(bestMove + "  " + preBestScore + " is white turn: " + board.IsWhiteToMove + "  depth reached: " + depth + " " + " nodes: " + nodes);//#DEBUG
          return bestMove;
      }
 }

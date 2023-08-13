@@ -21,7 +21,7 @@ namespace Chess_Challenge.Cli
 
         private void Reset()
         {
-            _bot = new MyBot();
+            _bot = new NegamaxBot();
             _board = Board.CreateBoardFromFEN(StartposFen);
         }
 
