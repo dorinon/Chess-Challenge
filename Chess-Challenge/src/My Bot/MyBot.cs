@@ -56,7 +56,7 @@ public class MyBot : IChessBot
         nodes++;//#DEBUG
         bool qsearch = depth <= 0, notRoot = ply > 0, isInCheck = board.IsInCheck();
         
-        if (board.IsRepeatedPosition() && notRoot) return 0;                                      
+        if (board.IsRepeatedPosition() && notRoot) return 0;
         if (board.GetLegalMoves().Length == 0) return isInCheck ? -30000 + ply : 0;
         
         int bestEval = -30000, eval, origAlpha = alpha;
@@ -73,19 +73,30 @@ public class MyBot : IChessBot
 
         if (qsearch)
         {
-            bestEval = Evaluate(board);
+            eval = Evaluate(board);
             //eval is StandPat
-            if(bestEval >= beta) return beta;
-            alpha = Math.Max(alpha, bestEval);
+            if(eval >= beta) return beta;
+            alpha = Math.Max(alpha, eval);
         }
         
-        Move[] moves = board.GetLegalMoves(qsearch && !isInCheck).
-            OrderByDescending(move => move.RawValue == entry.Move ? 100000 : 
-                move.IsCapture ? 100 * (int)move.CapturePieceType - (int)move.MovePieceType : 0).ToArray();
+        Move[] moves = board.GetLegalMoves(qsearch);
+        int[] scores = new int[moves.Length];
+
+        for (int i = 0; i < moves.Length; i++)
+        {
+            scores[i] = moves[i].RawValue == entry.Move ? 1000000 : moves[i].IsCapture ? 100 * (int)moves[i].CapturePieceType - (int)moves[i].MovePieceType : 0;
+        }
         // Generate and loop through all legal moves for the current player
         for (int i = 0; i < moves.Length; i++)
         {
             if (timer.MillisecondsElapsedThisTurn >= timer.MillisecondsRemaining / 30) return 30000;
+            
+            // Incrementally sort moves
+            for (int j = i + 1; j < moves.Length; j++)
+            {
+                if (scores[j] > scores[i])
+                    (scores[i], scores[j], moves[i], moves[j]) = (scores[j], scores[i], moves[j], moves[i]);
+            }
             Move move = moves[i];
             // Make the move on a temporary board and call search recursively
             //int Negamax(int next_alpha) => -Search(board, timer, depth, next_alpha, -alpha, ply + 1);
