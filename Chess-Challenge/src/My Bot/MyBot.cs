@@ -42,30 +42,32 @@ public class MyBot : IChessBot
     };
     public MyBot()
     {
-        for (int i = 0; i < 768; i++) psts[i] = (int)((int)(((BigInteger)quantizedArray[i / 12] >> (i % 12 * 8)) & 255) * 1.461f);
+        for (int i = 0; i < 768; i++) psts[i] = (int)((int)(((BigInteger)quantizedArray[i / 12] >> (i % 12 * 8)) & 255) * 1.461f) + PieceValues[i % 12];
     }
     int nodes;//#DEBUG
     // Transposition table entry
     record struct TTEntry(ulong Key, int Score, ushort Move, int Depth, int Bound);
-    const int Entries = 0x3FFFFF - 3;
     // Transposition table
-    TTEntry[] _tt = new TTEntry[Entries];
+    TTEntry[] _tt = new TTEntry[0x400000];
     
     // Negamax algorithm with alpha-beta pruning
-    private int Search(Board board, Timer timer, int depth, int alpha, int beta, int color, int ply)
+    private int Search(Board board, Timer timer, int depth, int alpha, int beta, int ply)
     {
         nodes++;//#DEBUG
         bool qsearch = depth <= 0, notRoot = ply > 0, isInCheck = board.IsInCheck();
         
-        if (board.IsRepeatedPosition()) return 0;                                      
+        if (board.IsRepeatedPosition() && notRoot) return 0;                                      
         if (board.GetLegalMoves().Length == 0) return isInCheck ? -30000 + ply : 0;
         
         int bestEval = -30000, eval, origAlpha = alpha;
         ulong key = board.ZobristKey;
-        TTEntry entry = _tt[key % Entries];
+        TTEntry entry = _tt[key & 0x3FFFFF];
         
-        if (notRoot && entry.Key == key && entry.Depth >= depth && (entry.Bound == 3 || entry.Bound == 2 && entry.Score >= beta || entry.Bound == 1 && entry.Score <= alpha))
-            return entry.Score;
+        if(notRoot && entry.Key == key && entry.Depth >= depth && (
+               entry.Bound == 3 // exact score
+               || entry.Bound == 2 && entry.Score >= beta // lower bound, fail high
+               || entry.Bound == 1 && entry.Score <= alpha // upper bound, fail low
+           )) return entry.Score;
         
         if (isInCheck) depth++;
 
@@ -73,7 +75,8 @@ public class MyBot : IChessBot
         {
             bestEval = Evaluate(board);
             //eval is StandPat
-            if(bestEval >= beta) return bestEval;
+            if(bestEval >= beta) return beta;
+            alpha = Math.Max(alpha, bestEval);
         }
         
         Move[] moves = board.GetLegalMoves(qsearch && !isInCheck).
@@ -85,14 +88,11 @@ public class MyBot : IChessBot
             if (timer.MillisecondsElapsedThisTurn >= timer.MillisecondsRemaining / 30) return 30000;
             Move move = moves[i];
             // Make the move on a temporary board and call search recursively
+            //int Negamax(int next_alpha) => -Search(board, timer, depth, next_alpha, -alpha, ply + 1);
             board.MakeMove(move);
-            bool windowSearch = i == 0 && !qsearch;
-            eval = -Search(board, timer,depth -1, windowSearch ? -alpha - 1 : -beta, -alpha, -color, ply+1);
-            if (windowSearch && eval > alpha)
-                eval = -Search(board, timer, depth - 1, -beta, -alpha, -color, ply + 1);
+            eval = -Search(board, timer, depth - 1, -beta, -alpha, ply + 1);
             board.UndoMove(move);
-
-            // Update the best move and prune if necessary
+                // Update the best move and prune if necessary
             if (eval > bestEval)
             {
                 bestEval = eval;
@@ -108,7 +108,7 @@ public class MyBot : IChessBot
         int bound = bestEval >= beta ? 2 : bestEval > origAlpha ? 3 : 1;
 
         // Push to TT
-        _tt[key % Entries] = new TTEntry(key, bestEval, _bestMove.RawValue, depth, bound);
+        _tt[key & 0x3FFFFF] = new TTEntry(key, bestEval, _bestMove.RawValue, depth, bound);
         
         return bestEval;
     }
@@ -116,16 +116,16 @@ public class MyBot : IChessBot
     {
         int mg = 0, eg = 0, phase = 0;
         foreach (bool stm in new []{true, false}) {
-            for(var p = 1; p <= 6; p++) {
+            for(var p = 0; p < 6; p++) {
                 int ind;
-                ulong bb = board.GetPieceBitboard((PieceType)p, stm);
+                ulong bb = board.GetPieceBitboard((PieceType)p + 1, stm);
                 while (bb != 0)
                 {
-                    ind = (BitboardHelper.ClearAndGetIndexOfLSB(ref bb) ^ (stm ? 56 : 0)) * 12 + p - 1;
-                    mg += psts[ind] + PieceValues[p - 1];
-                    eg += psts[ind + 6] + PieceValues[p + 5];;
+                    ind = (BitboardHelper.ClearAndGetIndexOfLSB(ref bb) ^ (stm ? 56 : 0)) * 12 + p;
+                    mg += psts[ind];
+                    eg += psts[ind + 6];
                     
-                    phase += gamePhaseInc[p - 1];
+                    phase += gamePhaseInc[p];
                 }
             }
             mg = -mg;
@@ -140,10 +140,9 @@ public class MyBot : IChessBot
          int prevScore = -50000;//#DEBUG
          int depth = 0;//#DEBUG
          // Iterative deepening loop
-         for (int i = 1; i < 50; i++)
+         while (true)
          {
-             int score = Search(board, timer, i, -30000, 30000, board.IsWhiteToMove ? 1 : -1, 0);
-             depth = i;//#DEBUG
+             int score = Search(board, timer, depth++, -30000, 30000, 0);
              if (timer.MillisecondsElapsedThisTurn >= timer.MillisecondsRemaining / 30) break;
              prevScore = score;//#DEBUG
          }

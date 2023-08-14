@@ -8,8 +8,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="psts optimized">
+    <list default="true" id="2bf9cfa4-3fc5-4257-bd37-06085c244fc6" name="Changes" comment="removed class variables">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chess-Challenge/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chess-Challenge.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Chess-Challenge/src/My Bot/MyBot.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +145,8 @@
       <workItem from="1691245961671" duration="11796000" />
       <workItem from="1691297692015" duration="835000" />
       <workItem from="1691816524640" duration="6570000" />
-      <workItem from="1691913937230" duration="2564000" />
+      <workItem from="1691913937230" duration="5078000" />
+      <workItem from="1691991883994" duration="2215000" />
     </task>
     <task id="LOCAL-00001" summary="added minimax search with alpha beta pruning the pruning has a bug I cant figure out!!!">
       <option name="closed" value="true" />
@@ -330,7 +332,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691915566274</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="removed class variables">
+      <option name="closed" value="true" />
+      <created>1691917697288</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1691917697288</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,7 +395,8 @@
     <MESSAGE value="optimized TT token use" />
     <MESSAGE value="added aspiration windows" />
     <MESSAGE value="psts optimized" />
-    <option name="LAST_COMMIT_MESSAGE" value="psts optimized" />
+    <MESSAGE value="removed class variables" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed class variables" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
